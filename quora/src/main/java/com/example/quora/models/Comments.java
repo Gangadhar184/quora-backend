@@ -12,6 +12,10 @@ public class Comments extends BaseModel {
     private String content;
 
     @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToOne
     @JoinColumn(name = "answer_id")
     private Answer answer;
 
@@ -29,5 +33,10 @@ public class Comments extends BaseModel {
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
 
-    private Set<User> LikedBy;
+    private Set<User> likedBy;
 }
+
+//here for every comment we didnt make association with user, technically we have to associate user to comments
+// one comment to be done by user and but one user can make multiple comments
+
+//done now user and comments are associated
