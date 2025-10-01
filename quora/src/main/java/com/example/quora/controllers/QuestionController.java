@@ -1,6 +1,7 @@
 package com.example.quora.controllers;
 
 
+import com.example.quora.dtos.QuestionDTO;
 import com.example.quora.models.Question;
 import com.example.quora.services.QuestionService;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +27,11 @@ public class QuestionController {
     public ResponseEntity<Question> getQuestionById(@PathVariable Long id){
         Optional<Question> question = questionService.getQuestionById(id);
         return question.map(ResponseEntity::ok).orElseGet(()->ResponseEntity.notFound().build());
+    }
+
+    @PostMapping
+    public Question createQuestion(@RequestBody QuestionDTO questionDTO) {
+        return questionService.createQuestion(questionDTO);
     }
 
     @DeleteMapping("/{id}")
