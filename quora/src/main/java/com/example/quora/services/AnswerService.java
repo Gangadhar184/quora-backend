@@ -10,8 +10,6 @@ import com.example.quora.repositories.QuestionRepository;
 import com.example.quora.repositories.UserRepository;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-
-import java.awt.print.Pageable;
 import java.util.List;
 import java.util.Optional;
 

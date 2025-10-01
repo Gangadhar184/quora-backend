@@ -4,6 +4,7 @@ package com.example.quora.services;
 
 
 import com.example.quora.dtos.UserDTO;
+import com.example.quora.models.Tag;
 import com.example.quora.models.User;
 import com.example.quora.repositories.TagRepository;
 import com.example.quora.repositories.UserRepository;
@@ -41,5 +42,13 @@ public class UserService {
 
     public void deleteUser(Long id){
         userRepository.deleteById(id);
+    }
+
+    //user can follow a particular tag
+    public void followTag(Long userId, Long tagId) {
+        User user = userRepository.findById(userId).orElseThrow(()->new RuntimeException("User not found")  );
+        Tag tag = tagRepository.findById(tagId).orElseThrow(()->new RuntimeException("Tag not found") );
+        user.getFollowedTags().add(tag);
+        userRepository.save(user);
     }
 }
