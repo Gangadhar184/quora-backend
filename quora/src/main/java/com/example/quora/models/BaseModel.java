@@ -1,15 +1,12 @@
 package com.example.quora.models;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
-@Entity
-@Data
 
+@Data
+@MappedSuperclass //each entity will get its own table in mysql and Fields (id) are copied into child entities
 public class BaseModel {
 
     @Id
