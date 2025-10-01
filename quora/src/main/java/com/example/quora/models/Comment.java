@@ -8,7 +8,7 @@ import java.util.Set;
 
 @Entity
 @Data
-public class Comments extends BaseModel {
+public class Comment extends BaseModel {
     private String content;
 
     @ManyToOne
@@ -21,10 +21,10 @@ public class Comments extends BaseModel {
 
     @ManyToOne
     @JoinColumn(name = "parent_comment_id")
-    private Comments parentComment;
+    private Comment parentComment;
 
     @OneToMany(mappedBy = "parentComment")
-    private Set<Comments> replies;
+    private Set<Comment> replies;
 
     @ManyToMany
     @JoinTable(

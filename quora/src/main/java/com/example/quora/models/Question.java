@@ -1,10 +1,7 @@
 package com.example.quora.models;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.Set;
@@ -23,6 +20,8 @@ public class Question extends BaseModel {
     )
 
     private Set<Tag> tags;
+
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 }

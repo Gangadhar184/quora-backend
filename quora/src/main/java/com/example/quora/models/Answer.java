@@ -19,7 +19,7 @@ public class Answer extends BaseModel {
     private User user;
 
     @OneToMany(mappedBy = "answer")
-    private Set<Comments> comments;
+    private Set<Comment> comments;
 
     @ManyToMany
     @JoinTable(
@@ -27,5 +27,5 @@ public class Answer extends BaseModel {
             joinColumns = @JoinColumn(name = "answer_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
-    private Set<User> LikedBy;
+    private Set<User> likedBy;
 }

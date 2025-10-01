@@ -2,7 +2,7 @@ package com.example.quora.services;
 
 import com.example.quora.dtos.CommentDTO;
 import com.example.quora.models.Answer;
-import com.example.quora.models.Comments;
+import com.example.quora.models.Comment;
 import com.example.quora.models.User;
 import com.example.quora.repositories.AnswerRepository;
 import com.example.quora.repositories.CommentsRepository;
@@ -27,20 +27,20 @@ public class CommentService {
         this.userRepository = userRepository;
     }
 
-    public List<Comments> getCommentsByAnswerId(Long answerId, int offset, int limit){
+    public List<Comment> getCommentsByAnswerId(Long answerId, int offset, int limit){
         return commentsRepository.findByAnswerId(answerId, PageRequest.of(offset, limit)).getContent();
     }
 
-    public List<Comments> getRepliesByCommentId(Long commentId, int offset, int limit) {
+    public List<Comment> getRepliesByCommentId(Long commentId, int offset, int limit) {
         return commentsRepository.findByParentCommentId(commentId, PageRequest.of(offset, limit)).getContent();
     }
 
-    public Optional<Comments> getCommentById(Long id) {
+    public Optional<Comment> getCommentById(Long id) {
         return commentsRepository.findById(id);
     }
 
-    public Comments createComment(CommentDTO commentDTO) {
-        Comments comments = new Comments();
+    public Comment createComment(CommentDTO commentDTO) {
+        Comment comments = new Comment();
         comments.setContent(commentDTO.getContent());
 
         // user
@@ -52,7 +52,7 @@ public class CommentService {
         answer.ifPresent(comments::setAnswer);
 
         if(commentDTO.getParentCommentId() != null) {
-            Optional<Comments> parentComment = commentsRepository.findById(commentDTO.getParentCommentId()) ;
+            Optional<Comment> parentComment = commentsRepository.findById(commentDTO.getParentCommentId()) ;
             parentComment.ifPresent(comments::setParentComment);
         }
         return commentsRepository.save(comments);
